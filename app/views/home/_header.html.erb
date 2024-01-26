@@ -1,0 +1,51 @@
+   <div class="nav-container bg-black text-white">
+        <nav class="flex justify-between items-center w-[90%] mx-auto">
+            <div class="logo font-black flex text-3xl">
+                <h1>Movie</h1>
+                <h1 class="text-[#4FC3F7]">Free</h1>   
+            </div>
+        <div id="openav" class="md:static md:min-h-fit absolute z-10 md:w-auto w-full left-0 top-[6%]">
+            <ul class="md:flex-row text-white flex flex-col">
+                <li class="p-3 hover:text-[#4FC3F7] text-center bg-[#37474F] rounded-sm border w-full md:w-auto md:bg-transparent md:border-none">
+                    <a href="http://127.0.0.1:3000/">Home</a>
+                </li>
+                <li id="hover-target" class="p-3 hover:text-[#4FC3F7] text-center bg-[#37474F] rounded-sm border w-full md:w-auto md:bg-transparent md:border-none">
+                    <a href="">Genre</a>
+                </li>
+                <li class="p-3 hover:text-[#4FC3F7] text-center bg-[#37474F] rounded-sm border w-full md:w-auto md:bg-transparent md:border-none">
+                    <a href=""><%=link_to "Trending Movies", top_movies_path%></a>
+                </li>
+                <li class="p-3 hover:text-[#4FC3F7] text-center bg-[#37474F] rounded-sm border w-full md:w-auto md:bg-transparent md:border-none">
+                    <a href="">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+        <div class="button flex items-center gap-6">
+               <%= form_tag(find_movies_url, method: :get, class: "flex items-center") do %>
+    <%= text_field_tag :search, @search_movie, class: "border rounded-md px-2 py-1 ", placeholder: "Search for anything..."  %>
+    <%= submit_tag "Search", class: "bg-blue-500 ml-1 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md" %>
+  <% end %>
+        </div>
+        </nav>
+</div>
+<div id="hidden-element" class="genres-container hidden w-full flex items-center justify-center bg-gray-300">
+  <% @genre_list["genres"].each do |genre|%>
+  <%= link_to find_genre_url(id: genre["id"], name: genre["name"]) do %>
+  <button class="hover:bg-sky-300 p-3 rounded-sm"><%= genre["name"]%></button>
+  <%end%>
+<%end%>
+</div>
+
+
+<script>
+const hoverTarget = document.getElementById('hover-target');
+const hiddenElement = document.getElementById('hidden-element');
+
+ hoverTarget.addEventListener('mouseenter', () => {
+      hiddenElement.classList.remove('hidden');
+    });
+
+    hiddenElement.addEventListener('mouseleave', () => {
+      hiddenElement.classList.add('hidden');
+    });
+</script>

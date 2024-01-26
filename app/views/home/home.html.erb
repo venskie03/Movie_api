@@ -1,0 +1,82 @@
+<%= render 'header' %>
+<div class="my-4">
+</div>
+<% if flash[:error].present? %>
+  <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+    <% flash[:error].each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="mt-5 grid justify-items-center">
+  <h1 class="text-xl font-bold">Now Playing Movies</h1>
+  <div class=" grid grid-cols-1 md:grid-cols-7 justify-items-center gap-2">
+    <% @nowplaying_data.each do |movie| %>
+      <div class="bg-white shadow-md rounded-md p-4 w-full grid justify-items-center">
+                 <%= link_to movie_overview_url(id: movie["id"] ), class: "block w-44 h-60 rounded-md overflow-hidden" do %>
+  <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}", class: "object-cover w-full h-full") %>
+<% end %>
+       <div class="w-[90%]">
+        <h2 class="text-lg font-bold mt-2"><%= movie['original_title'] %></h2>
+        <p class="mt-2 text-gray-600">Popularity <%= movie['popularity'] %></p>
+        <p class="mt-2 text-gray-600">Release Date: <%= movie['release_date'] %></p>
+       </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="mt-10 grid justify-items-center">
+  <h1 class="text-xl font-bold">Popular Movies</h1>
+  <div class=" grid grid-cols-1 md:grid-cols-7 justify-items-center gap-2">
+    <% @popular_movies.each do |movie| %>
+      <div class="bg-white shadow-md rounded-md p-4 w-full grid justify-items-center">
+        <%= link_to movie_overview_url(id: movie["id"] ), class: "block w-44 h-60 rounded-md overflow-hidden" do %>
+  <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}", class: "object-cover w-full h-full") %>
+<% end %>
+      <div class="w-[90%]">
+        <h2 class="text-lg font-bold mt-2"><%= movie['original_title'] %></h2>
+        <p class="mt-2 text-gray-600">Popularity <%= movie['popularity'] %></p>
+        <p class="mt-2 text-gray-600">Release Date: <%= movie['release_date'] %></p>
+      </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="mt-10 grid justify-items-center">
+  <h1 class="text-xl font-bold">Top Rated Movies</h1>
+  <div class=" grid grid-cols-1 md:grid-cols-7 justify-items-center gap-2">
+    <% @toprated_movies.each do |movie| %>
+      <div class="bg-white shadow-md rounded-md p-4 w-full grid justify-items-center">
+        <%= link_to movie_overview_url(id: movie["id"] ), class: "block w-44 h-60 rounded-md overflow-hidden" do %>
+  <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}", class: "object-cover w-full h-full") %>
+<% end %>
+        <div class="w-[90%]">
+        <h2 class="text-lg font-bold mt-2"><%= movie['original_title'] %></h2>
+        <p class="mt-2 text-gray-600">Popularity <%= movie['popularity'] %></p>
+        <p class="mt-2 text-gray-600">Release Date: <%= movie['release_date'] %></p>
+      </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="mt-10 grid justify-items-center">
+  <h1 class="text-xl font-bold">TV Shows</h1>
+  <div class=" grid grid-cols-1 md:grid-cols-7 justify-items-center gap-2">
+    <% @tvshows.each do |tvshow| %>
+      <div class="bg-white shadow-md rounded-md p-4 w-full grid justify-items-center">
+        <%= link_to movie_overview_url(id: tvshow["id"] ), class: "block w-44 h-60 rounded-md overflow-hidden" do %>
+  <%= image_tag("https://image.tmdb.org/t/p/w500#{tvshow['poster_path']}", class: "object-cover w-full h-full") %>
+<% end %>
+       <div class="w-[90%]">
+         <h2 class="text-lg font-bold mt-2"><%= tvshow['original_name'] %></h2>
+        <p class="mt-2 text-gray-600">Popularity <%= tvshow['popularity'] %></p>
+        <p class="mt-2 text-gray-600">Release Date: <%= tvshow['release_date'] %></p>
+       </div>
+      </div>
+    <% end %>
+  </div>
+</div>

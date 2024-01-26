@@ -1,0 +1,22 @@
+<%= render 'header' %>
+<div class="mt-5 grid justify-items-center">
+  <div class=" grid grid-cols-1 md:grid-cols-7 justify-items-center gap-2">
+    <% @genre_data.each do |movie| %>
+      <div class="bg-white shadow-md rounded-md p-4 w-full grid justify-items-center">
+        <%= link_to movie_overview_url(id: movie["id"] ), class: "block w-44 h-60 rounded-md overflow-hidden" do %>
+  <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}", class: "object-cover w-full h-full") %>
+<% end %>
+        <h2 class="text-lg justify-items-start font-bold mt-2"><%= movie['original_title'] %></h2>
+        <div class="flex flex-wrap">
+               <p>Genre: <% @genre_list["genres"].each do |genre|%>
+                <% if movie['genre_ids'].include?(genre["id"])%>
+                <p class="ml-2"><%= genre["name"]%></p>
+                <%end%>
+            <%end%></p>
+        </div>
+        <p class="mt-2 text-gray-600">Popularity: <%= movie['popularity'] %></p>
+        <p class="mt-2 text-gray-600">Release Date: <%= movie['release_date'] %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
