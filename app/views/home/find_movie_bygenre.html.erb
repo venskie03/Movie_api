@@ -8,7 +8,7 @@
 <% end %>
         <h2 class="text-lg justify-items-start font-bold mt-2"><%= movie['original_title'] %></h2>
         <div class="flex flex-wrap">
-               <p>Genre: <% @genre_list["genres"].each do |genre|%>
+               <p>Genre: <% @genre_list.each do |genre|%>
                 <% if movie['genre_ids'].include?(genre["id"])%>
                 <p class="ml-2"><%= genre["name"]%></p>
                 <%end%>

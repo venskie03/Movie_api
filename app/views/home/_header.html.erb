@@ -29,7 +29,7 @@
         </nav>
 </div>
 <div id="hidden-element" class="genres-container hidden w-full flex items-center justify-center bg-gray-300">
-  <% @genre_list["genres"].each do |genre|%>
+  <% @genre_list.each do |genre|%>
   <%= link_to find_genre_url(id: genre["id"], name: genre["name"]) do %>
   <button class="hover:bg-sky-300 p-3 rounded-sm"><%= genre["name"]%></button>
   <%end%>

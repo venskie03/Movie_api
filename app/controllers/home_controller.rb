@@ -1,19 +1,11 @@
 require 'uri'
 require 'net/http'
+require_relative '../api/tmdbapi'
 class HomeController < ApplicationController
-
+  API_KEY = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTU0NTY0MjA0ODkyMTQwYzY1OWNiOTY4MzlkYjg0YyIsInN1YiI6IjY1YWU5MzNlMjVjZDg1MDBhY2NiMWE4MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S9Jt-21GW3iaDr70K4caK37dhdjH7i5pDGa6d5Ez4vs'
 def movie_genre
-genre_url = URI("https://api.themoviedb.org/3/genre/movie/list?language=en")
-
-http = Net::HTTP.new(genre_url.host, genre_url.port)
-http.use_ssl = true
-
-request_genre = Net::HTTP::Get.new(genre_url)
-request_genre["accept"] = 'application/json'
-request_genre["Authorization"] = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTU0NTY0MjA0ODkyMTQwYzY1OWNiOTY4MzlkYjg0YyIsInN1YiI6IjY1YWU5MzNlMjVjZDg1MDBhY2NiMWE4MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S9Jt-21GW3iaDr70K4caK37dhdjH7i5pDGa6d5Ez4vs'
-
-genre_response = http.request(request_genre)
-@genre_list = JSON.parse(genre_response.read_body)
+  tmdb_api = Tmdbapi.new(API_KEY)
+  @genre_list = tmdb_api.fetch_movie_genres
 end
 
 def find_movie_bygenre
@@ -65,7 +57,6 @@ findbyid_url = URI("https://api.themoviedb.org/3/movie/#{@movie_id}?language=en-
 
   response_findbyid = http.request(findbyid)
   @movie_details = JSON.parse(response_findbyid.read_body)
-
 end
 
 
