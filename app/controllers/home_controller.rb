@@ -12,18 +12,8 @@ def find_movie_bygenre
   movie_genre
   @genre_id = params[:id]
   @genre_name = params[:name]
-  @genre_data = []
-  (1..3).each do |num|
-    url = URI("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=#{num}&sort_by=popularity.desc&with_genres=#{@genre_id}")
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-    request = Net::HTTP::Get.new(url)
-    request["accept"] = 'application/json'
-    request["Authorization"] = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTU0NTY0MjA0ODkyMTQwYzY1OWNiOTY4MzlkYjg0YyIsInN1YiI6IjY1YWU5MzNlMjVjZDg1MDBhY2NiMWE4MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S9Jt-21GW3iaDr70K4caK37dhdjH7i5pDGa6d5Ez4vs'
-    response = http.request(request)
-    nowp_data = JSON.parse(response.read_body)
-    @genre_data.concat(nowp_data["results"])
-  end
+  tmdb_api = Tmdbapi.new(API_KEY)
+  @genre_data = tmdb_api.movie_bygenre(@genre_id, @genre_name)
 end
 
 def movie_overview
@@ -59,21 +49,24 @@ findbyid_url = URI("https://api.themoviedb.org/3/movie/#{@movie_id}?language=en-
   @movie_details = JSON.parse(response_findbyid.read_body)
 end
 
+def movies_player
+  tmdb_api = Tmdbapi.new(API_KEY)
+  @url = tmdb_api.movie_player(@movie_url)
+end
+
+
+def fetch_data
+  tmdb_api = Tmdbapi.new(API_KEY)
+  @now_playing_movies = tmdb_api.now_playing_movies
+
+  render json: @now_playing_movies
+end
 
 
 def now_playing
-  @nowplaying_data = []
-  (1..3).each do |num|
-    url = URI("https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=#{num}")
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-    request = Net::HTTP::Get.new(url)
-    request["accept"] = 'application/json'
-    request["Authorization"] = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTU0NTY0MjA0ODkyMTQwYzY1OWNiOTY4MzlkYjg0YyIsInN1YiI6IjY1YWU5MzNlMjVjZDg1MDBhY2NiMWE4MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S9Jt-21GW3iaDr70K4caK37dhdjH7i5pDGa6d5Ez4vs'
-    response = http.request(request)
-    nowp_data = JSON.parse(response.read_body)
-    @nowplaying_data.concat(nowp_data["results"])
-  end
+  tmdb_api = Tmdbapi.new(API_KEY)
+  @now_playing_movies = tmdb_api.now_playing_movies
+
 end
 
 def popular

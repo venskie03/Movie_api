@@ -12,7 +12,7 @@
 <div class="mt-5 grid justify-items-center">
   <h1 class="text-xl font-bold">Now Playing Movies</h1>
   <div class=" grid grid-cols-1 md:grid-cols-7 justify-items-center gap-2">
-    <% @nowplaying_data.each do |movie| %>
+    <% @now_playing_movies.each do |movie| %>
       <div class="bg-white shadow-md rounded-md p-4 w-full grid justify-items-center">
                  <%= link_to movie_overview_url(id: movie["id"] ), class: "block w-44 h-60 rounded-md overflow-hidden" do %>
   <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}", class: "object-cover w-full h-full") %>

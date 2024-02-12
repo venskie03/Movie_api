@@ -10,6 +10,7 @@ title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; cli
 <div class="flex justify-center p-3">
    <div class="w-[60%]">
       <h1 class="text-3xl"> <%= @movie_details["original_title"] %></h1>
+       <h1 class="text-3xl"> <%= @movie_details["id"] %></h1>
 <p class="mt-3"> <%= @movie_details["overview"] %></p>
    <p class="mt-2">Genre: <% @movie_details["genres"].each do |genre|%>
     <%= genre["name"]%>
@@ -24,3 +25,8 @@ title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; cli
    </div>
 </div>
  </div>
+ <div class="trailer-vid w-full">
+    <iframe width="100%" height="700" src="<%= "https://www.2embed.stream/embed/movie/" +  @movie_details["id"].to_s %>" 
+title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;
+ encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
