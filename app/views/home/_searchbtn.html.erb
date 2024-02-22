@@ -1,0 +1,15 @@
+ <div class="button flex items-center justify-center mb-10">
+  <div class="grid w-full">
+    <div class="mt-10 text-center">
+      <h1 class="text-3xl font-bold">Discover Endless Entertainment</h1>
+    </div>
+    <div class="mt-6 flex justify-center">
+      <%= form_tag(find_movies_url, method: :get, class: "flex items-center") do %>
+        <%= text_field_tag :search, @search_movie, class: "border rounded-md md:px-6 px-3 md:py-4 py-1 text-black md:w-96", placeholder: "Search for anything..." %>
+        <button type="submit" class="bg-blue-500 ml-1 hover:bg-blue-700 text-white font-bold md:py-4 py-1 md:w-14 font-bold px-4 rounded-md">
+          <ion-icon name="search-outline"></ion-icon>
+        </button>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,81 @@ class Tmdbapi
     @api_key = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTU0NTY0MjA0ODkyMTQwYzY1OWNiOTY4MzlkYjg0YyIsInN1YiI6IjY1YWU5MzNlMjVjZDg1MDBhY2NiMWE4MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S9Jt-21GW3iaDr70K4caK37dhdjH7i5pDGa6d5Ez4vs"
   end
 
+  def movieoverview(movie_id)
+    url = URI("https://api.themoviedb.org/3/movie/#{movie_id}/videos?language=en-US")
+    response = send_request(url)
+    movie_data = JSON.parse(response.read_body)
+    movie_key = nil
+    movie_data["results"].each do |trailer|
+      if trailer["type"] == "Trailer"
+        movie_key = trailer["key"]
+        break
+      end
+    end
+    return movie_data, movie_key
+  end
+
+  def popular_movies
+    @popular_movie = []
+    (1..3).each do |num|
+      uri = URI("https://api.themoviedb.org/3/movie/popular?language=en-US&page=#{num}")
+      response = send_request(uri)
+      nowp_data = JSON.parse(response.read_body)
+      @popular_movie.concat(nowp_data["results"])
+    end
+    @popular_movie
+  end
+
+  def toprated_movie
+    @toprated_movie = []
+    (1..3).each do |num|
+      uri = URI("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=#{num}")
+      response = send_request(uri)
+      nowp_data = JSON.parse(response.read_body)
+      @toprated_movie.concat(nowp_data["results"])
+    end
+    @toprated_movie
+  end
+
+  def top_movies
+    @data_movie = []
+    (1..5).each do |num|
+      uri = URI("https://api.themoviedb.org/3/movie/popular?language=en-US&page=#{num}")
+      response = send_request(uri)
+      movie_data = JSON.parse(response.read_body)
+      @data_movie.concat(movie_data["results"])
+    end
+    @data_movie
+  end
+
+  def find_movies_byname(search_movie)
+    if search_movie.present?
+      @movie_data = []
+     (1..5).each do |pagenum|
+      uri = URI("https://api.themoviedb.org/3/search/movie?query=#{search_movie}&include_adult=false&language=en-US&page=#{pagenum}")
+      response = send_request(uri)
+      find_data = JSON.parse(response.body)
+      @movie_data.concat(find_data["results"])
+     end
+     @movie_data
+    else
+      flash[:error] = "Search field cannot be empty"
+    end
+  end
+
+
+
+  def movie_details(movie_id)
+    uri = URI("https://api.themoviedb.org/3/movie/#{movie_id}?language=en-US")
+    response_findbyid = send_request(uri)
+
+    if response_findbyid.is_a?(Net::HTTPSuccess)
+      JSON.parse(response_findbyid.read_body)
+    else
+      nil
+    end
+  end
+
   def movie_player(movie_url)
     movie_url = MOVIE_PLAYER
   end

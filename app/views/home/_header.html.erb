@@ -4,10 +4,10 @@
                 <h1>Movie</h1>
                 <h1 class="text-[#4FC3F7]">Free</h1>   
             </div>
-        <div id="openav" class="md:static md:min-h-fit absolute z-10 md:w-auto w-full left-0 top-[6%]">
+        <div id="navigationbar" class="md:static md:flex hidden md:min-h-fit md:ml-32 absolute z-10 md:w-auto w-full left-0 top-[8%]">
             <ul class="md:flex-row text-white flex flex-col">
                 <li class="p-3 hover:text-[#4FC3F7] text-center bg-[#37474F] rounded-sm border w-full md:w-auto md:bg-transparent md:border-none">
-                    <a href="http://127.0.0.1:3000/">Home</a>
+                    <a href="/">Home</a>
                 </li>
                 <li id="hover-target" class="p-3 hover:text-[#4FC3F7] text-center bg-[#37474F] rounded-sm border w-full md:w-auto md:bg-transparent md:border-none">
                     <a href="">Genre</a>
@@ -20,11 +20,13 @@
                 </li>
             </ul>
         </div>
-        <div class="button flex items-center gap-6">
-               <%= form_tag(find_movies_url, method: :get, class: "flex items-center") do %>
-    <%= text_field_tag :search, @search_movie, class: "border rounded-md px-2 py-1 ", placeholder: "Search for anything..."  %>
-    <%= submit_tag "Search", class: "bg-blue-500 ml-1 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md" %>
-  <% end %>
+        <div class="icon mr-2 mt-3">
+            <ion-icon id="openingnvabar" class="text-3xl md:hidden font-bold" name="menu-outline"></ion-icon>
+            <ion-icon id="closingnavbar" class="text-3xl font-bold hidden" name="close-outline"></ion-icon>
+        </div>
+
+             <div class="button flex items-center gap-6 hidden md:flex">
+                    <button class="bg-[#4FC3F7] p-2 rounded-lg w-[80px]">Login</button>
         </div>
         </nav>
 </div>
@@ -37,6 +39,8 @@
 </div>
 
 
+
+
 <script>
 const hoverTarget = document.getElementById('hover-target');
 const hiddenElement = document.getElementById('hidden-element');
@@ -47,5 +51,21 @@ const hiddenElement = document.getElementById('hidden-element');
 
     hiddenElement.addEventListener('mouseleave', () => {
       hiddenElement.classList.add('hidden');
+    });
+
+     const openingNavbar = document.getElementById('openingnvabar');
+    const closingNavbar = document.getElementById('closingnavbar');
+    const navigationBar = document.getElementById('navigationbar');
+
+    openingNavbar.addEventListener('click', function() {
+        navigationBar.classList.remove('hidden');
+        openingNavbar.classList.add('hidden');
+        closingNavbar.classList.remove('hidden');
+    });
+
+    closingNavbar.addEventListener('click', function() {
+        navigationBar.classList.add('hidden');
+        openingNavbar.classList.remove('hidden');
+        closingNavbar.classList.add('hidden');
     });
 </script>
