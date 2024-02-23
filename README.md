@@ -72,3 +72,69 @@ https://api.themoviedb.org/3/search/movie?query=<search_query>&include_adult=fal
 
 Replace <search_query> with your search query and <page_number> with the page number to paginate through the search results.
 * ...
+
+# API Documentation
+
+## Version 1
+
+### Fetch Now Playing Movies
+
+Returns a list of currently playing movies.
+
+- **URL**: `/api/v1/nowplayingmovies`
+- **Method**: `GET`
+- **Response**: JSON array of movie objects
+
+### Find Movies by Genre
+
+Returns a list of movies based on a specific genre based on its ID.
+
+- **URL**: `/api/v1/genre/:id`
+- **Method**: `GET`
+- **Parameters**:
+  - `id` (required): The ID of the genre.
+- **Response**: JSON array of movie objects
+
+### Get Movie Genre List
+
+Returns a list of movie genres.
+
+- **URL**: `/api/v1/genre_name`
+- **Method**: `GET`
+- **Response**: JSON array of genre names
+
+### Get Popular Movies
+
+Returns a list of popular movies.
+
+- **URL**: `/api/v1/popular`
+- **Method**: `GET`
+- **Response**: JSON array of movie objects
+
+### Get Movie Details by ID
+
+Returns details of a movie based on its ID.
+
+- **URL**: `/api/v1/details/:id`
+- **Method**: `GET`
+- **Parameters**:
+  - `id` (required): The ID of the movie.
+- **Response**: JSON object containing movie details
+
+### Get Top Rated Movies
+
+Returns a list of top-rated movies.
+
+- **URL**: `/api/v1/toprated_movies`
+- **Method**: `GET`
+- **Response**: JSON array of movie objects
+
+## ADDITIONALLY
+
+## FETCHING FULLMOVIE URL AND PROFILE PICTURE OF THE MOVIE USE THIS SAMPLE
+
+**FetchingProfileOFthe Movie**
+<img src="https://image.tmdb.org/t/p/w500 + poster_path ">
+
+ **FetchingfullMovieOFthe Movie**
+<iframe src="https://www.2embed.stream/embed/movie/ + movie id">

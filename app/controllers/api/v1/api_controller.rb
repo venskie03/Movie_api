@@ -5,7 +5,7 @@ class Api::V1::ApiController < ApplicationController
   def nowplayingmovies
   tmdb_api = Tmdbapi.new(API_KEY)
   @now_playing_movies = tmdb_api.now_playing_movies
-  render json: @now_playing_movies
+  render json: @now_playing_movies 
   end
 
   def find_movie_bygenre
