@@ -78,7 +78,7 @@ Replace <search_query> with your search query and <page_number> with the page nu
 ## Version 1
 
 ### This API endpoint allows users to search for movies by their name.
-- **URL**: `https://movieapp-zyqr.onrender.com/api/v1/{movie_name}`
+- **URL**: `https://movieapp-zyqr.onrender.com/api/v1/movie_name/{movie_name}`
 - **Method**: `GET`
 - **Response**: JSON array of movie objects
 
