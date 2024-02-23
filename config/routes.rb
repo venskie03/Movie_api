@@ -9,6 +9,24 @@ Rails.application.routes.draw do
   get '/play_movies', to: "home#movies_player", as: "movies_player"
   get 'embed/movie/:id', to: 'movies#show', as: 'embed_movie'
 
+  #### RENDER TO JSON
+  namespace :api do
+    namespace :v1 do
+      ## fetch nowplaying movies
+      get '/nowplayingmovies', to: "api#nowplayingmovies"
+
+      get '/genre/:id', to: "api#find_movie_bygenre"
+
+      get '/genre_name', to: "api#movie_genre"
+
+      get '/popular', to: "api#popular"
+
+      get '/details/:id', to: "api#movie_details_byid"
+
+      get '/toprated_movies', to: "api#toprated"
+    end
+  end
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
