@@ -17,13 +17,15 @@ Rails.application.routes.draw do
 
       get '/genre/:id', to: "api#find_movie_bygenre"
 
-      get '/genre_name', to: "api#movie_genre"
+      get '/genre_list', to: "api#movie_genre"
 
       get '/popular', to: "api#popular"
 
       get '/details/:id', to: "api#movie_details_byid"
 
       get '/toprated_movies', to: "api#toprated"
+
+      get '/movie_name/:search', to: "api#find"
     end
   end
 

@@ -5,7 +5,7 @@ class Api::V1::ApiController < ApplicationController
   def nowplayingmovies
   tmdb_api = Tmdbapi.new(API_KEY)
   @now_playing_movies = tmdb_api.now_playing_movies
-  render json: @now_playing_movies 
+  render json: @now_playing_movies
   end
 
   def find_movie_bygenre
@@ -38,6 +38,13 @@ class Api::V1::ApiController < ApplicationController
     tmdb_api = Tmdbapi.new(API_KEY)
     @toprated_movies = tmdb_api.toprated_movie
     render json: @toprated_movies
+  end
+
+  def find
+    @search_movie = params[:search]&.gsub(' ', '%20')
+    tmdb_api = Tmdbapi.new(API_KEY)
+    @data = tmdb_api.find_movies_byname(@search_movie)
+    render json: @data
   end
 
 end
