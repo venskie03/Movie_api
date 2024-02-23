@@ -139,7 +139,7 @@ Returns a list of top-rated movies.
 ## FETCHING FULLMOVIE URL AND PROFILE PICTURE OF THE MOVIE USE THIS SAMPLE
 
 **FetchingProfileOFthe Movie**
-<img src="https://image.tmdb.org/t/p/w500 + poster_path ">
+## <img src="https://image.tmdb.org/t/p/w500 + poster_path ">
 
  **FetchingfullMovieOFthe Movie**
-<iframe src="https://www.2embed.stream/embed/movie/ + movie id">
+## <iframe src="https://www.2embed.stream/embed/movie/ + movie id">
