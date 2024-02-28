@@ -59,7 +59,7 @@ end
 def tvshows
   @tvshows = []
   (1..3).each do |num|
-    url = URI("https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=#{num}&sort_by=popularity.desc")
+    url = URI("https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=#{num}")
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
     request = Net::HTTP::Get.new(url)
@@ -75,6 +75,13 @@ def movie_genre
   movie_details_byid
   tmdb_api = Tmdbapi.new(API_KEY)
   @genre_list = tmdb_api.fetch_movie_genres
+end
+
+def tvshows_overview
+  @tvshows_id = params[:id]
+  tmdb_api = Tmdbapi.new(API_KEY)
+  @tvshows_data = tmdb_api.tvshows_details(@tvshows_id)
+  @video_path = "https://www.2embed.stream/embed/tv/94954/1/1"
 end
 
 def home

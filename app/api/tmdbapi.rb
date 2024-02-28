@@ -123,6 +123,16 @@ class Tmdbapi
     @nowplaying_data
   end
 
+  def tvshows_details(tvshows_id)
+    uri =  URI("https://api.themoviedb.org/3/tv/#{tvshows_id}?language=en-US")
+    response_findbyid = send_request(uri)
+    if response_findbyid.is_a?(Net::HTTPSuccess)
+      JSON.parse(response_findbyid.read_body)
+    else
+      nil
+    end
+  end
+
   private
 
   def send_request(uri)

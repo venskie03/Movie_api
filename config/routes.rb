@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/play_movies', to: "home#movies_player", as: "movies_player"
   get 'embed/movie/:id', to: 'movies#show', as: 'embed_movie'
 
+  get '/tvshows_overview/:id', to: "home#tvshows_overview", as: "tvshows_overview"
+
   #### RENDER TO JSON
   namespace :api do
     namespace :v1 do
