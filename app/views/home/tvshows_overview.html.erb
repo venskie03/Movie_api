@@ -1,1 +1,15 @@
-<iframe class="w-full h-screen" src="<%= @video_path %>"></iframe>
+
+<% if @tvshows_data.present? %>
+<div class="md:w-1/3">
+        <img class="w-80 h-auto rounded-md" src="<%= "https://image.tmdb.org/t/p/w500".concat(@tvshows_data["poster_path"]) %>">
+    </div>
+  <h1><%= @tvshows_data["original_name"] %></h1>
+  <p><%= @tvshows_data["overview"] %></p>
+   <% episode_num = @tvshows_data["number_of_episodes"].to_i %>
+   <% (1..episode_num).each do |number| %>
+    <div class="flex"><p class="bg-yellow-300 p-3 gap-3"><%= number %></p></div>
+<% end %>
+  <p>Number of seasons: <%= @tvshows_data["number_of_seasons"] %></p>
+<% else %>
+  <p>No TV show data available.</p>
+<% end %>

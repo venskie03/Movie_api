@@ -56,37 +56,14 @@ def toprated
   @toprated_movies = tmdb_api.toprated_movie
 end
 
-def tvshows
-  @tvshows = []
-  (1..3).each do |num|
-    url = URI("https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=#{num}")
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-    request = Net::HTTP::Get.new(url)
-    request["accept"] = 'application/json'
-    request["Authorization"] = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTU0NTY0MjA0ODkyMTQwYzY1OWNiOTY4MzlkYjg0YyIsInN1YiI6IjY1YWU5MzNlMjVjZDg1MDBhY2NiMWE4MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S9Jt-21GW3iaDr70K4caK37dhdjH7i5pDGa6d5Ez4vs'
-    response = http.request(request)
-    nowp_data = JSON.parse(response.read_body)
-    @tvshows.concat(nowp_data["results"])
-  end
-end
-
 def movie_genre
   movie_details_byid
   tmdb_api = Tmdbapi.new(API_KEY)
   @genre_list = tmdb_api.fetch_movie_genres
 end
 
-def tvshows_overview
-  @tvshows_id = params[:id]
-  tmdb_api = Tmdbapi.new(API_KEY)
-  @tvshows_data = tmdb_api.tvshows_details(@tvshows_id)
-  @video_path = "https://www.2embed.stream/embed/tv/94954/1/1"
-end
-
 def home
   movie_genre
-  tvshows
   popular
   now_playing
   toprated

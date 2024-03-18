@@ -134,12 +134,38 @@ Returns a list of top-rated movies.
 - **Method**: `GET`
 - **Response**: JSON array of movie objects
 
-## ADDITIONALLY
 
-## FETCHING FULLMOVIE URL AND PROFILE PICTURE OF THE MOVIE USE THIS SAMPLE
+# TV Shows API Documentation
 
-**FetchingProfileOFthe Movie**
-## img src="https://image.tmdb.org/t/p/w500 + poster_path
+## Version 2
 
- **FetchingfullMovieOFthe Movie**
-## <iframe src="https://www.2embed.stream/embed/movie/ + movie id">
+## This API provides access to information about TV shows.
+
+## Get Home Page
+   Returns a list of TV shows for the home page.
+
+- **URL**: `https://movieapp-zyqr.onrender.com/api/v2/tvshows`
+- **METHOD**: `GET`
+- **Response**: JSON array of movie objects
+
+### Get TV Show Overview
+ Returns an overview of a specific TV show.
+
+- **URL**: `https://movieapp-zyqr.onrender.com/api/v2/tvshows_overview/:id`
+- **METHOD**: `GET`
+- **Response**: JSON array of movie objects
+- **EXAMPLE**: `https://movieapp-zyqr.onrender.com/api/v2/tvshows_overview/12345`
+
+
+## Find TV Shows
+  Search for TV shows based on a query string.
+
+- **URL**: `https://movieapp-zyqr.onrender.com/api/v2/find_tvshows/:search`
+- **METHOD**: `GET`
+- **Response**: JSON array of movie objects
+- **EXAMPLE**: `GET https://movieapp-zyqr.onrender.com/api/v2/find_tvshows/avatar`
+
+
+
+
+

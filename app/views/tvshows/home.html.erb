@@ -1,0 +1,17 @@
+<div class="mt-20 grid justify-items-center">
+  <h1 class="text-xl font-bold">TV Shows</h1>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    <% @popular_tvshows.each do |tvshow| %>
+      <div class="bg-white shadow-md rounded-md p-4 w-full grid justify-items-center">
+        <%= link_to tvshows_overview_url(id: tvshow["id"]), class: "block w-44 h-60 rounded-md overflow-hidden" do %>
+          <%= image_tag(tvshow['profile_picture_url'], class: "object-cover w-full h-full") %>
+        <% end %>
+        <div class="w-[90%]">
+          <h2 class="text-lg font-bold mt-2"><%= tvshow['original_name'] %></h2>
+          <p class="mt-2 text-gray-600">Popularity <%= tvshow['popularity'] %></p>
+          <p class="mt-2 text-gray-600">Release Date: <%= tvshow['release_date'] %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

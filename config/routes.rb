@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   get '/play_movies', to: "home#movies_player", as: "movies_player"
   get 'embed/movie/:id', to: 'movies#show', as: 'embed_movie'
 
-  get '/tvshows_overview/:id', to: "home#tvshows_overview", as: "tvshows_overview"
+  get '/tvshows', to: "tvshows#home"
+  get '/tvshows_overview/:id', to: "tvshows#tvshows_overview", as: "tvshows_overview"
+  get '/tvshows_player/:series_id/:season_number/:episode_number', to: "tvshows#tvplayer", as: "tvplayer"
+  get '/find_tvshows/:search', to: "tvshows#find_tvshows", as: "find_tvshows"
 
   #### RENDER TO JSON
   namespace :api do
@@ -28,6 +31,14 @@ Rails.application.routes.draw do
       get '/toprated_movies', to: "api#toprated"
 
       get '/movie_name/:search', to: "api#find"
+    end
+  end
+
+  namespace :api do
+    namespace :v2 do
+      get '/tvshows_overview/:id', to: "tvshows_api_#tvshows_overview"
+      get '/find_tvshows/:search', to: "tvshows_api_#find_tvshows"
+      get '/tvshows', to: "tvshows_api_#home"
     end
   end
 
