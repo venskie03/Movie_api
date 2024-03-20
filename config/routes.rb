@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/play_movies', to: "home#movies_player", as: "movies_player"
   get 'embed/movie/:id', to: 'movies#show', as: 'embed_movie'
 
+  get '/test', to: "home#testing"
+
   get '/tvshows', to: "tvshows#home"
   get '/tvshows_overview/:id', to: "tvshows#tvshows_overview", as: "tvshows_overview"
   get '/tvshows_player/:series_id/:season_number/:episode_number', to: "tvshows#tvplayer", as: "tvplayer"
@@ -39,6 +41,7 @@ Rails.application.routes.draw do
       get '/tvshows_overview/:id', to: "tvshows_api_#tvshows_overview"
       get '/find_tvshows/:search', to: "tvshows_api_#find_tvshows"
       get '/tvshows', to: "tvshows_api_#home"
+      get '/all_series/:search', to: "tvshows_api_#find_data"
     end
   end
 

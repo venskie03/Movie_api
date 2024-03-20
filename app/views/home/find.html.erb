@@ -2,7 +2,7 @@
 <%= render 'searchbtn' %>
 <div class="mt-5 grid justify-items-center">
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-items-center gap-2">
-    <% @data.each do |movie| %>
+    <% @alldata.each do |movie| %>
       <div class="bg-white shadow-md rounded-md p-4 w-full grid justify-items-center">
         <%= link_to movie_overview_url(id: movie["id"]), class: "block w-44 h-60 rounded-md overflow-hidden" do %>
           <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}", class: "object-cover w-full h-full") %>
@@ -11,6 +11,7 @@
           <h2 class="text-lg font-bold mt-2"><%= movie['original_title'] %></h2>
           <p class="mt-2 text-gray-600">Popularity <%= movie['popularity'] %></p>
           <p class="mt-2 text-gray-600">Release Date: <%= movie['release_date'] %></p>
+          <p class="mt-2 text-gray-600">Type: <%= movie['series_type'] %></p>
         </div>
       </div>
     <% end %>

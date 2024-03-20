@@ -59,24 +59,6 @@ class Tmdbapi
     @data_movie
   end
 
-  def find_movies_byname(search_movie)
-    if search_movie.present?
-      @movie_data = []
-     (1..5).each do |pagenum|
-      uri = URI("https://api.themoviedb.org/3/search/movie?query=#{search_movie}&include_adult=false&language=en-US&page=#{pagenum}")
-      response = send_request(uri)
-      find_data = JSON.parse(response.body)
-      find_data["results"].each do |movie|
-        profile_picture_url = "#{DP_URL}#{movie["poster_path"]}"
-        movie["profile_picture_url"] = profile_picture_url
-        @movie_data << movie
-      end
-     end
-     @movie_data
-    else
-      flash[:error] = "Search field cannot be empty"
-    end
-  end
 
   def movie_details(movie_id)
     uri = URI("https://api.themoviedb.org/3/movie/#{movie_id}?language=en-US")
@@ -192,15 +174,52 @@ class Tmdbapi
     @tvshows
   end
 
-  def search_tvshows(tvshows_name)
+  def find_movies_byname(search_name)
+    if search_name.present?
+      @movie_data = []
+     (1..5).each do |pagenum|
+      uri = URI("https://api.themoviedb.org/3/search/movie?query=#{search_name}&include_adult=false&language=en-US&page=#{pagenum}")
+      response = send_request(uri)
+      find_data = JSON.parse(response.body)
+      find_data["results"].each do |movie|
+        profile_picture_url = "#{DP_URL}#{movie["poster_path"]}"
+        movie["profile_picture_url"] = profile_picture_url
+        movie["series_type"] = "Movie"
+        @movie_data << movie
+      end
+     end
+     @movie_data
+    else
+      flash[:error] = "Search field cannot be empty"
+    end
+  end
+
+  def search_tvshows(search_name)
     @search_tvshows = []
     (1..20).each do |num|
-    uri = URI("https://api.themoviedb.org/3/search/tv?query=#{tvshows_name}&include_adult=false&language=en-US&page=#{num}")
+    uri = URI("https://api.themoviedb.org/3/search/tv?query=#{search_name}&include_adult=false&language=en-US&page=#{num}")
     response = send_request(uri)
     tvdata = JSON.parse(response.read_body)
-    @search_tvshows.concat(tvdata["results"])
+    tvdata["results"].each do |tv|
+      profile_picture_url = "#{DP_URL}#{tv["poster_path"]}"
+      tv["profile_picture_url"] = profile_picture_url
+      tv["series_type"] = "TVShows"
+      @search_tvshows << tv
+    end
     end
     @search_tvshows
+  end
+
+  def search_byname(search_name)
+    find_movies_byname(search_name)
+    search_tvshows(search_name)
+
+    {
+      data: {
+        movies: @movie_data,
+        tv_shows: @search_tvshows
+      }
+    }
   end
 
 

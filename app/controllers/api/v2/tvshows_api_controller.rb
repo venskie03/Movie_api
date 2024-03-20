@@ -29,8 +29,18 @@ class Api::V2::TvshowsApiController < ApplicationController
   def find_tvshows
     @tvshows_name = params[:search]&.gsub(' ', '%20')
     tmdb_api = Tmdbapi.new(API_KEY)
-    @tvshows_data = tmdb_api.search_tvshows(@tvshows_name)
-    render json: @tvshows_data
+    @search_tvshows = tmdb_api.search_tvshows(@tvshows_name)
+    render json: @search_tvshows
+  end
+
+  def find_data
+    @alldata = []
+    @search_name = params[:search]&.gsub(' ', '%20')
+    tmdb_api = Tmdbapi.new(API_KEY)
+    @data = tmdb_api.search_byname(@search_name)
+    @alldata.concat(@data[:data][:movies]) 
+    @alldata.concat(@data[:data][:tv_shows])
+    render json: @alldata
   end
 
 

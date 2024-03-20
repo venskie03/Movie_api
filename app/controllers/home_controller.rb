@@ -4,6 +4,9 @@ require_relative '../api/tmdbapi'
 class HomeController < ApplicationController
 API_KEY = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTU0NTY0MjA0ODkyMTQwYzY1OWNiOTY4MzlkYjg0YyIsInN1YiI6IjY1YWU5MzNlMjVjZDg1MDBhY2NiMWE4MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S9Jt-21GW3iaDr70K4caK37dhdjH7i5pDGa6d5Ez4vs'
 
+def testing
+end
+
 def find_movie_bygenre
   movie_genre
   @genre_id = params[:id]
@@ -76,10 +79,14 @@ end
   end
 
   def find
+    @alldata = []
     movie_genre
-    @search_movie = params[:search]&.gsub(' ', '%20')
+    @search_name = params[:search]&.gsub(' ', '%20')
     tmdb_api = Tmdbapi.new(API_KEY)
-    @data = tmdb_api.find_movies_byname(@search_movie)
+    @data = tmdb_api.search_byname(@search_name)
+    @alldata.concat(@data[:data][:movies]) 
+    @alldata.concat(@data[:data][:tv_shows])
   end
+  
 
 end

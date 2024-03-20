@@ -1,0 +1,71 @@
+   <div class="nav-container bg-black text-white">
+        <nav class="flex justify-between items-center w-[90%] mx-auto">
+            <div class="logo font-black flex text-3xl">
+                <h1>Movie</h1>
+                <h1 class="text-[#4FC3F7]">Free</h1>   
+            </div>
+        <div id="navigationbar" class="md:static md:flex hidden md:min-h-fit md:ml-32 absolute z-10 md:w-auto w-full left-0 top-[8%]">
+            <ul class="md:flex-row text-white flex flex-col">
+                <li class="p-3 hover:text-[#4FC3F7] text-center bg-[#37474F] rounded-sm border w-full md:w-auto md:bg-transparent md:border-none">
+                    <a href="/">Home</a>
+                </li>
+                <li id="hover-target" class="p-3 hover:text-[#4FC3F7] text-center bg-[#37474F] rounded-sm border w-full md:w-auto md:bg-transparent md:border-none">
+                    <a href="">Genre</a>
+                </li>
+                <li class="p-3 hover:text-[#4FC3F7] text-center bg-[#37474F] rounded-sm border w-full md:w-auto md:bg-transparent md:border-none">
+                    <a href=""><%=link_to "Trending Movies", top_movies_path%></a>
+                </li>
+                <li class="p-3 hover:text-[#4FC3F7] text-center bg-[#37474F] rounded-sm border w-full md:w-auto md:bg-transparent md:border-none">
+                    <a href="">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+        <div class="icon mr-2 mt-3">
+            <ion-icon id="openingnvabar" class="text-3xl md:hidden font-bold" name="menu-outline"></ion-icon>
+            <ion-icon id="closingnavbar" class="text-3xl font-bold hidden" name="close-outline"></ion-icon>
+        </div>
+
+             <div class="button flex items-center gap-6 hidden md:flex">
+                    <button class="bg-[#4FC3F7] p-2 rounded-lg w-[80px]">Login</button>
+        </div>
+        </nav>
+</div>
+<div id="hidden-element" class="genres-container hidden w-full flex items-center justify-center bg-gray-300">
+  <% @genre_list.each do |genre|%>
+  <%= link_to find_genre_url(id: genre["id"], name: genre["name"]) do %>
+  <button class="hover:bg-sky-300 p-3 rounded-sm"><%= genre["name"]%></button>
+  <%end%>
+<%end%>
+</div>
+
+
+
+
+<script>
+const hoverTarget = document.getElementById('hover-target');
+const hiddenElement = document.getElementById('hidden-element');
+
+ hoverTarget.addEventListener('mouseenter', () => {
+      hiddenElement.classList.remove('hidden');
+    });
+
+    hiddenElement.addEventListener('mouseleave', () => {
+      hiddenElement.classList.add('hidden');
+    });
+
+     const openingNavbar = document.getElementById('openingnvabar');
+    const closingNavbar = document.getElementById('closingnavbar');
+    const navigationBar = document.getElementById('navigationbar');
+
+    openingNavbar.addEventListener('click', function() {
+        navigationBar.classList.remove('hidden');
+        openingNavbar.classList.add('hidden');
+        closingNavbar.classList.remove('hidden');
+    });
+
+    closingNavbar.addEventListener('click', function() {
+        navigationBar.classList.add('hidden');
+        openingNavbar.classList.remove('hidden');
+        closingNavbar.classList.add('hidden');
+    });
+</script>

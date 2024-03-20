@@ -166,6 +166,13 @@ Returns a list of top-rated movies.
 - **EXAMPLE**: `GET https://movieapp-zyqr.onrender.com/api/v2/find_tvshows/avatar`
 
 
+## Find Movies and Tv_Shows
+  Search for TV shows and Movies based on a query string.
+- **URL**: `https://movieapp-zyqr.onrender.com/api/v2/all_series/:search_name`
+- **METHOD**: `GET`
+- **Response**: JSON array of movie objects
+- **EXAMPLE**: `https://movieapp-zyqr.onrender.com/api/v2/all_series/avatar`
+
 
 
 
