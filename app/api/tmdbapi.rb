@@ -10,6 +10,8 @@ class Tmdbapi
   BASE_API = "&tmdb=1"
   DP_URL= "https://image.tmdb.org/t/p/w500"
 
+  MOVIE_URL1 = "https://vidsrc.to/embed/movie/"
+
   def initialize(api_key)
     @api_key = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTU0NTY0MjA0ODkyMTQwYzY1OWNiOTY4MzlkYjg0YyIsInN1YiI6IjY1YWU5MzNlMjVjZDg1MDBhY2NiMWE4MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S9Jt-21GW3iaDr70K4caK37dhdjH7i5pDGa6d5Ez4vs"
   end
@@ -69,7 +71,9 @@ class Tmdbapi
       if movie_details.present?
         profile_picture_url = "#{DP_URL}#{movie_details["poster_path"]}"
         full_movie_url = "#{FULLMOVIE_URL}#{movie_id}#{BASE_API}"
+        full_movie_url_1 = "#{MOVIE_URL1}#{movie_id}"
         movie_details["fullmovieurl"] = full_movie_url
+        movie_details["fullmovieurl_1"] = full_movie_url_1
         movie_details["profile_pictureURL"] = profile_picture_url
       end
       movie_details
