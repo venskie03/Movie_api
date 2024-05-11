@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.1.2"
+ruby "3.3.1"
 
 gem "pg"
 gem 'better_errors', '~> 2.9', '>= 2.9.1'
