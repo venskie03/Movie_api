@@ -6,7 +6,7 @@ databases:
 
 services:
   - type: web
-    name: Movieapp
+    name: Movie_api
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
